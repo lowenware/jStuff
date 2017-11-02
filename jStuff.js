@@ -1,3 +1,5 @@
+"use strict";
+
 /* -------------------------------------------------------------------------- */
 
 function jsSelectId( id )
@@ -31,7 +33,7 @@ function jsNodeHasClass(node, className)
 
 function jsNodeAddClass(node, className)
 {
-  if (! nodeHasClass (node, className))
+  if (! jsNodeHasClass (node, className))
     node.className += ' '+className;
 }
 
@@ -54,3 +56,51 @@ function jsNodeOnClick(node, handler)
 {
   node.addEventListener('click', handler, false);
 }
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeOnMouseLeave(node, handler)
+{
+  node.addEventListener('mouseleave', handler, false);
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeFindParentByClass(node, className)
+{
+  while ( node.parentNode )
+  {
+    if (jsNodeHasClass(node.parentNode, className))
+      return node.parentNode;
+    node = node.parentNode;
+  }
+  return null;
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeRemoveChilds(node)
+{
+  while(node.firstChild) { node.removeChild(node.firstChild); }
+  return node;
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsEventGetCurrentTarget(event)
+{
+  var currentTarget;
+  if (event.currentTarget)
+  {
+    currentTarget = event.currentTarget;
+    if (currentTarget.nodeType==3)
+      currentTarget = currentTarget.parentNode;
+  }
+  else
+    currentTarget = event.srcElement;
+
+  return currentTarget;
+}
+
+/* -------------------------------------------------------------------------- */
+

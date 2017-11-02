@@ -1,8 +1,9 @@
-function Ajax() {
+function Ajax(url, onload, onfail) {
 
-  this._url = window.location.href;
-  this._onload = function(r, t) {};
-  this._onfail = function(e) {};
+  alert(url);
+  this._url = (url) ? url : window.location.href;
+  this._onload = onload ? onload : function(r, t) {};
+  this._onfail = onfail ? onfail : function(e) {};
   this._sync = true;
   this._data = null;
   this._method = 'GET';
@@ -37,26 +38,30 @@ function Ajax() {
     return result;
   }
 
-  this._onReadyStateChange = function {
+  this._onReadyStateChange = function() {
 
-    if (request.readyState == 4) 
+    if (this._request.readyState == 4) 
     {
-      if (request.status === 200) 
+      if (this._request.status === 200) 
       {
-        this._onload(request.responseText, request.getResponseHeader("Content-Type"));
+        this._onload(
+          this._request.responseText,
+          this._request.getResponseHeader("Content-Type")
+        );
       }
       else
       {
-        this._onfail(request.statusText);
+        this._onfail(this._request.statusText);
       }
     }
   }
 
   this.send = function( data )
   {
-    var query = '', request = this._newXmlHttpRequest();
+    var query = '', t = this;
+    this._request = this._newXmlHttpRequest();
 
-    if (!request) return false;
+    if (!this._request) return false;
 
     if (data)
     {
@@ -72,12 +77,12 @@ function Ajax() {
       }
     }
 
-    request.overrideMimeType("text/plain");
-    request.open(this._method, this._url, this._sync);
-    request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    request.onreadystatechange = this._onReadyStateChange;
+    this._request.overrideMimeType("text/plain");
+    this._request.open(this._method, this._url, this._sync);
+    this._request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    this._request.onreadystatechange = function(){ t._onReadyStateChange() };
 
-    request.send(query);
+    this._request.send(query);
 
     return true;
   }
