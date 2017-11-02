@@ -1,6 +1,6 @@
 *
 
 !.gitignore
-!wrapper.js
-!ajax.js
+!jStuff.js
+!Ajax.js
 !README.md
