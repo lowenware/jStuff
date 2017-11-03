@@ -1,14 +1,15 @@
 function Ajax(url, onload, onfail) {
 
-  alert(url);
-  this._url = (url) ? url : window.location.href;
-  this._onload = onload ? onload : function(r, t) {};
-  this._onfail = onfail ? onfail : function(e) {};
-  this._sync = true;
-  this._data = null;
-  this._method = 'GET';
+  this.url = (url) ? url : window.location.href;
+  this.onload = onload ? onload : function(resp, type) {};
+  this.onfail = onfail ? onfail : function(e) {};
+  this.sync = true;
+  this.data = null;
+  this.method = 'GET';
+  this.token = null;
 
-  this._newXmlHttpRequest = function() {
+  this.newXmlHttpRequest = function()
+  {
     var result = null;
 
     try 
@@ -38,51 +39,55 @@ function Ajax(url, onload, onfail) {
     return result;
   }
 
-  this._onReadyStateChange = function() {
-
-    if (this._request.readyState == 4) 
+  this.onReadyStateChange = function()
+  {
+    if (this.request.readyState == 4) 
     {
-      if (this._request.status === 200) 
+      if (this.request.status === 200) 
       {
-        this._onload(
-          this._request.responseText,
-          this._request.getResponseHeader("Content-Type")
+        this.onload(
+          this.request.responseText,
+          this.request.getResponseHeader("Content-Type"),
+          this.token
         );
       }
       else
       {
-        this._onfail(this._request.statusText);
+        this.onfail(this.request.statusText, this.token);
       }
+      this.token = null;
+      return true;
     }
+    return false
   }
 
   this.send = function( data )
   {
-    var query = '', t = this;
-    this._request = this._newXmlHttpRequest();
+    var query = '', _this = this;
+    this.request = this.newXmlHttpRequest();
 
-    if (!this._request) return false;
+    if (!this.request) return false;
 
     if (data)
     {
-      for (var key in this._data)
+      for (var key in this.data)
       {
         if (query != '') query += '&';
-          query += encodeURIComponent(key)+'='+encodeURIComponent(this._data[key]);
+          query += encodeURIComponent(key)+'='+encodeURIComponent(this.data[key]);
       }
 
-      if (this._method == 'GET')
+      if (this.method == 'GET')
       {
-        this._url += '?'+query;
+        this.url += '?'+query;
       }
     }
 
-    this._request.overrideMimeType("text/plain");
-    this._request.open(this._method, this._url, this._sync);
-    this._request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    this._request.onreadystatechange = function(){ t._onReadyStateChange() };
+    this.request.overrideMimeType("text/plain");
+    this.request.open(this.method, this.url, this.sync);
+    this.request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    this.request.onreadystatechange = function(){ if(_this.onReadyStateChange()) _this=null; };
 
-    this._request.send(query);
+    this.request.send(query);
 
     return true;
   }

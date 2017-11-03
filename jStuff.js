@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* -------------------------------------------------------------------------- */
 
@@ -20,6 +20,22 @@ function jsSelectAll(query)
 {
   return document.querySelectorAll(query);
 }
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeNew( tagName, child )
+{
+  var node = document.createElement( tagName );
+  if (child)
+    node.appendChild( child );
+  return node;
+}
+
+function jsTextNodeNew( nodeText )
+{
+  return document.createTextNode( nodeText );
+}
+
 
 /* -------------------------------------------------------------------------- */
 
@@ -46,7 +62,7 @@ function jsNodeRemoveClass(node, className)
   if (n != -1)
   {
     list[n] = '';
-    node.className += list.join(' ');
+    node.className = list.join(' ');
   }
 }
 
@@ -100,6 +116,18 @@ function jsEventGetCurrentTarget(event)
     currentTarget = event.srcElement;
 
   return currentTarget;
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsDateDiffDays(date1, date2)
+{
+  var DAY_MILISECONDS = 1000 * 60 * 60 * 24;
+
+  var utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+  var utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+
+  return Math.floor((utc2 - utc1) / DAY_MILISECONDS);
 }
 
 /* -------------------------------------------------------------------------- */
