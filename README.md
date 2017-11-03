@@ -1,2 +1,3 @@
-# js
-JavaScript
+# jStuff
+
+Minimalistic JavaScript toolkit
