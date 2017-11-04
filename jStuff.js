@@ -31,11 +31,31 @@ function jsNodeNew( tagName, child )
   return node;
 }
 
+/* -------------------------------------------------------------------------- */
+
 function jsTextNodeNew( nodeText )
 {
   return document.createTextNode( nodeText );
 }
 
+/* -------------------------------------------------------------------------- */
+
+function jsNodeAttribute(node, attrName, attrValue)
+{
+  if (attrValue)
+    node.setAttribute(attrName, attrValue);
+
+  return node.getAttribute(attrName);
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeText(node, text)
+{
+  jsNodeRemoveChilds(node);
+  node.appendChild(jsTextNodeNew(text));
+  return node;
+}
 
 /* -------------------------------------------------------------------------- */
 
