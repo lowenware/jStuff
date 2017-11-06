@@ -50,11 +50,28 @@ function jsNodeAttribute(node, attrName, attrValue)
 
 /* -------------------------------------------------------------------------- */
 
-function jsNodeText(node, text)
+function jsNodeSetText(node, text)
 {
   jsNodeRemoveChilds(node);
   node.appendChild(jsTextNodeNew(text));
   return node;
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeGetFirstTag(node, tagName)
+{
+  node = node.firstChild;
+
+  while(node)
+  {
+    if (node.tagName && node.tagName.toLowerCase() == tagName)
+      return node;
+
+    node = node.nextSibling;
+  }
+
+  return null;
 }
 
 /* -------------------------------------------------------------------------- */
