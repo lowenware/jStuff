@@ -4,7 +4,6 @@ function Ajax(url, onload, onfail) {
   this.onload = onload ? onload : function(resp, type) {};
   this.onfail = onfail ? onfail : function(e) {};
   this.sync = true;
-  this.data = null;
   this.method = 'GET';
   this.token = null;
 
@@ -70,10 +69,10 @@ function Ajax(url, onload, onfail) {
 
     if (data)
     {
-      for (var key in this.data)
+      for (var key in data)
       {
         if (query != '') query += '&';
-          query += encodeURIComponent(key)+'='+encodeURIComponent(this.data[key]);
+          query += encodeURIComponent(key)+'='+encodeURIComponent(data[key]);
       }
 
       if (this.method == 'GET')
