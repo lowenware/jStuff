@@ -63,7 +63,6 @@ function TabView( selector )
       {
         this.tabs.push(i);
         jsNodeAttribute(i, '_page', node.href.substr( node.href.indexOf('#')+1 ) );
-        console.log( node.href.substr( node.href.indexOf('#')+1 ) );
         node.href='javascript:;';
 
         jsNodeOnClick(node, function(e){ _this.onTabClick(e); });
