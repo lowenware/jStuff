@@ -169,3 +169,28 @@ function jsDateDiffDays(date1, date2)
 
 /* -------------------------------------------------------------------------- */
 
+function jsDateToLocalISODate(date)
+{
+  var y = date.getFullYear(),m = date.getMonth()+1, d = date.getDate();
+
+  if (m<10) m = '0'+m;
+  if (d<10) d = '0'+d;
+
+  return y+'-'+m+'-'+d;
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsDateToLocalISOTime(date)
+{
+  var h = date.getHours(), m = date.getMinutes(), s = date.getSeconds();
+
+  if (h<10) h = '0'+h;
+  if (m<10) m = '0'+m;
+  if (s<10) s = '0'+s;
+
+  return h+':'+m+':'+s;
+}
+
+/* -------------------------------------------------------------------------- */
+
