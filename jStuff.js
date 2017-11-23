@@ -109,6 +109,18 @@ function jsNodeOnClick(node, handler)
 {
   node.addEventListener('click', handler, false);
 }
+/* -------------------------------------------------------------------------- */
+
+function jsNodeOnBlur(node, handler)
+{
+  node.addEventListener('blur', handler, false);
+}
+
+/* -------------------------------------------------------------------------- */
+function jsNodeOnChange(node, handler)
+{
+  node.addEventListener('change', handler, false);
+}
 
 /* -------------------------------------------------------------------------- */
 
