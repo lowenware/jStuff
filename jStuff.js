@@ -206,3 +206,9 @@ function jsDateToLocalISOTime(date)
 
 /* -------------------------------------------------------------------------- */
 
+function jsDocumentOnKeyPress( handler )
+{
+  return document.addEventListener("keydown", handler, false);
+}
+
+/* -------------------------------------------------------------------------- */
