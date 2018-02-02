@@ -62,7 +62,9 @@ function Ajax(url, onload, onfail) {
 
   this.send = function( data )
   {
-    var query = '', _this = this;
+    var query = '',
+        _this = this;
+
     this.request = this.newXmlHttpRequest();
 
     if (!this.request) return false;
@@ -72,13 +74,13 @@ function Ajax(url, onload, onfail) {
       for (var key in data)
       {
         if (query != '') query += '&';
-          query += encodeURIComponent(key)+'='+encodeURIComponent(data[key]);
+        query += encodeURIComponent(key)+'='+encodeURIComponent(data[key]);
       }
-
-      if (this.method == 'GET')
+      this.method = 'POST'
+      /* if (this.method == 'GET')
       {
         this.url += '?'+query;
-      }
+      } */
     }
 
     this.request.overrideMimeType("text/plain");
