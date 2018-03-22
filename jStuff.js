@@ -117,10 +117,19 @@ function jsNodeOnBlur(node, handler)
 }
 
 /* -------------------------------------------------------------------------- */
+
 function jsNodeOnChange(node, handler)
 {
   node.addEventListener('change', handler, false);
 }
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeOnInput(node, handler)
+{
+  node.addEventListener('input', handler, false);
+}
+
 
 /* -------------------------------------------------------------------------- */
 
