@@ -107,7 +107,7 @@ function jsNodeRemoveClass(node, className)
 
 function jsNodeOnClick(node, handler)
 {
-  node.addEventListener('click', handler, false);
+  node.addEventListener('click', handler, true);
 }
 /* -------------------------------------------------------------------------- */
 
