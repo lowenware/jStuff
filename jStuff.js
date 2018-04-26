@@ -105,6 +105,18 @@ function jsNodeRemoveClass(node, className)
 
 /* -------------------------------------------------------------------------- */
 
+function jsAddEventListener(source, eventName, handler)
+{
+  if(source.addEventListener)
+    source.addEventListener(eventName, handler, false)
+  else if (source.attachEvent)
+    source.attachEvent("on"+eventName, handler);
+  else
+    source['on'+eventName] = handler;
+}
+
+/* -------------------------------------------------------------------------- */
+
 function jsNodeOnClick(node, handler)
 {
   node.addEventListener('click', handler, true);
@@ -218,6 +230,16 @@ function jsDateToLocalISOTime(date)
 function jsDocumentOnKeyPress( handler )
 {
   return document.addEventListener("keydown", handler, false);
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsLog(mod, text)
+{
+  if (console && console.log)
+  {
+    console.log(mod+': '+text);
+  }
 }
 
 /* -------------------------------------------------------------------------- */

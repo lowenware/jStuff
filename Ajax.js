@@ -60,10 +60,13 @@ function Ajax(url, onload, onfail) {
     return false
   }
 
-  this.send = function( data )
+  this.send = function( data, method )
   {
     var query = '', _this = this;
     this.request = this.newXmlHttpRequest();
+
+    if (!method)
+      method = 'GET';
 
     if (!this.request) return false;
 
@@ -75,9 +78,10 @@ function Ajax(url, onload, onfail) {
           query += encodeURIComponent(key)+'='+encodeURIComponent(data[key]);
       }
 
-      if (this.method == 'GET')
+      if (method == 'GET')
       {
         this.url += '?'+query;
+        query = null;
       }
     }
 
