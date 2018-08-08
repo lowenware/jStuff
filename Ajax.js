@@ -11,7 +11,7 @@ function Ajax(url, onload, onfail) {
   {
     var result = null;
 
-    try 
+    try
     {
       result = new XMLHttpRequest();
     }
@@ -27,7 +27,7 @@ function Ajax(url, onload, onfail) {
 
       for(var i=0; i<iev.length; i++)
       {
-        try 
+        try
         {
           result = new ActiveXObject(iev[i]);
           break;
@@ -40,9 +40,9 @@ function Ajax(url, onload, onfail) {
 
   this.onReadyStateChange = function()
   {
-    if (this.request.readyState == 4) 
+    if (this.request.readyState == 4)
     {
-      if (this.request.status === 200) 
+      if (this.request.status === 200)
       {
         this.onload(
           this.request.responseText,
@@ -86,7 +86,7 @@ function Ajax(url, onload, onfail) {
     }
 
     this.request.overrideMimeType("text/plain");
-    this.request.open(this.method, this.url, this.sync);
+    this.request.open(method, this.url, this.sync);
     this.request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     this.request.onreadystatechange = function(){ if(_this.onReadyStateChange()) _this=null; };
 
@@ -95,4 +95,3 @@ function Ajax(url, onload, onfail) {
     return true;
   }
 }
-
