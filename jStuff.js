@@ -221,3 +221,18 @@ function jsDocumentOnKeyPress( handler )
 }
 
 /* -------------------------------------------------------------------------- */
+
+function jsLog( source, message, exception )
+{
+  if (console && console.log)
+  {
+    var to_log = (message) ? source +': '+message : source;
+
+    if (exception)
+      to_log += ' ('+exception+')';
+
+    console.log(to_log);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
