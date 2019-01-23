@@ -59,6 +59,20 @@ function jsNodeSetText(node, text)
 
 /* -------------------------------------------------------------------------- */
 
+function jsNodeGetFirstParentTag(node, tagName)
+{
+  while(node)
+  {
+    if (node.tagName && node.tagName.toLowerCase() == tagName)
+      return node;
+
+    node = node.parentNode;
+  }
+
+  return null;
+}
+
+
 function jsNodeGetFirstTag(node, tagName)
 {
   node = node.firstChild;
@@ -248,3 +262,22 @@ function jsLog( source, message, exception )
 }
 
 /* -------------------------------------------------------------------------- */
+
+function jsIsFunction( obj ) {
+ return obj && {}.toString.call(obj) === '[object Function]';
+}
+
+/* -------------------------------------------------------------------------- */
+
+function jsNodeGetOffset( node )
+{
+  var _x = 0;
+  var _y = 0;
+  while( node && !isNaN( node.offsetLeft ) && !isNaN( node.offsetTop ) )
+  {
+    _x += node.offsetLeft - node.scrollLeft;
+    _y += node.offsetTop - node.scrollTop;
+    node = node.offsetParent;
+  }
+  return { top: _y, left: _x };
+}
